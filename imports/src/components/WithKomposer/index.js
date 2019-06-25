@@ -15,6 +15,7 @@ const withKomposer = (
   isSubscribe = false,
   options = defaultOptions
 ) => {
+	console.log(isSubscribe)
   return compose(
     isSubscribe ? getTrackerLoader(composer) : composer,
     options

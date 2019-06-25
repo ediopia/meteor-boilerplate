@@ -1,0 +1,13 @@
+.sidebar-wrapper{
+  top: $header-height!important;
+  .sidebar{
+    z-index: 3!important;
+    background-color: $light!important;
+    min-width: 240px;
+    box-shadow: none;
+    border-right: 1px solid $light;
+  }
+  .sidebar-overlay{
+    z-index: 2!important;
+  }
+}

@@ -5,7 +5,7 @@ import { createBrowserHistory } from "history";
 import { Provider } from "react-redux";
 import { Meteor } from "meteor/meteor";
 
-import App from "../../src/App.jsx";
+import App from "../../src/App.js";
 import store from "../../api/redux/store/configureStore";
 
 

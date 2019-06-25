@@ -1,4 +1,23 @@
 {
-  "public": {},
-  "private": {}
+  "public": {
+    "oAuth": {
+      "nos": {
+        "client_id": "dcca5880e173addb808189a28ce2f93b",
+        "redirect_uri": "http://localhost:3000/_oauth/nos"
+      },
+      "facebook": {
+        "client_id": "1270888883078961"
+      }
+    }
+  },
+  "private": {
+    "oAuth": {
+      "facebook": {
+        "client_secret": "3002022a28bb878d7d6a6349cf5a15f3"
+      },
+      "nos": {
+        "client_secret": "9d8f2f06a0812f011b0ffbc590ac5421f06622f50ebfcc11d5c11262f37704ef"
+      }
+    }
+  }
 }

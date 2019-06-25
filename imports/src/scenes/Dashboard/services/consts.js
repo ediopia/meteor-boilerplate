@@ -1,0 +1,1 @@
+export const DEFAULT_DESKTOP_WIDTH = 1024
