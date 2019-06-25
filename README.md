@@ -1,10 +1,11 @@
 ## Meteor boilerplate
 
 - React
-- Redux
+- React hook
 - React Router 4
 - Bulma (scss)
 - Some utils
+- Type script
 
 #### How to run:
 

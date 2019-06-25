@@ -7,9 +7,11 @@ export default class Home extends React.Component {
       <>
         <Header />
         <div className="section">
-          <h1 className="title">
-            Meteor + React + Redux + React router 4 + Bulma + Some utils
-          </h1>
+          <div className="container">
+            <h1 className="title">
+              Meteor + React + Redux + React router 4 + Bulma + Some utils
+            </h1>
+          </div>
         </div>
       </>
     );

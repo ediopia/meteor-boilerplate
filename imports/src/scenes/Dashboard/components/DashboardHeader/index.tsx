@@ -1,41 +1,41 @@
 import * as React from "react";
 import classNames from "classnames";
 import { Meteor } from "meteor/meteor";
-import { useState } from "react";
-import { useEffect } from "react";
 import MobileMenuBarButton from "imports/src/components/Header/components/MobileMenuBarButton";
 
 interface IProps {
   user: object;
+  isSidebarOpen: boolean;
+  isMenuOpen: boolean;
   toggleSidebar: () => void;
+  toggleMenu: () => void;
   redirect: (path: string) => void;
-  historyListener: (l: () => void) => void;
 }
 
 const DashboardHeader: React.FC<IProps> = ({
   redirect,
   user,
-  historyListener,
-  toggleSidebar
+  isSidebarOpen,
+  isMenuOpen,
+  toggleSidebar,
+  toggleMenu
 }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  useEffect(() =>
-    historyListener(() => {
-      setIsMenuOpen(false);
-    })
-  );
   return (
     <nav className="navbar is-fixed-top-touch is-primary">
       <div className="navbar-brand">
-        <a className="navbar-item" onClick={toggleSidebar}>
+        <a
+          className={classNames(
+            "navbar-item",
+            isSidebarOpen ? "is-active" : ""
+          )}
+          onClick={toggleSidebar}
+        >
           <span className="icon">
             <i className="fas fa-bars" />
           </span>
           <span> Menu</span>
         </a>
-        <MobileMenuBarButton
-          toggleMenuOpen={() => setIsMenuOpen(!isMenuOpen)}
-        />
+        <MobileMenuBarButton toggleMenuOpen={toggleMenu} />
       </div>
       <div className={classNames("navbar-menu", isMenuOpen ? "is-active" : "")}>
         <div className="navbar-end">

@@ -15,7 +15,7 @@ const AuthModal: React.FC<AuthModalProps> = ({onClose}) => {
 				className="modal-close is-large"
 				aria-label="close"
 			/>
-			<div className="modal-content">
+			<div style={{maxWidth: "320px"}} className="modal-content">
 				<div className="box">
 					<AuthRoutes onClose={onClose}/>
 				</div>

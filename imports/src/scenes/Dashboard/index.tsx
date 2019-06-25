@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as Sidebar from "react-sidebar";
+const Sidebar = require("react-sidebar");
 import Helmet from "react-helmet";
 import { withTracker } from "meteor/react-meteor-data";
 import { useState, useEffect } from "react";
@@ -10,6 +10,7 @@ import { DEFAULT_DESKTOP_WIDTH } from "./services/consts";
 import DashboardNav from "./components/SidebarNav";
 import DashboardHeader from "./components/DashboardHeader";
 import Login from "../Auth/scenes/Login";
+
 import { RouteComponentProps } from "react-router-dom";
 
 interface DashboardProps {
@@ -25,9 +26,11 @@ const Dashboard: React.FC<DashboardProps & RouteComponentProps> = ({
 }) => {
   if (isLoggingIn) return <div />;
   if (!user) return <Login />;
-
+  const [isMenuOpen, setMenuOpen] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
+
   const isDesktop = width >= DEFAULT_DESKTOP_WIDTH;
+
   const [isSidebarOpen, setSidebarOpen] = useState(isDesktop);
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
@@ -35,6 +38,7 @@ const Dashboard: React.FC<DashboardProps & RouteComponentProps> = ({
     history.listen(() => {
       if (!isDesktop) {
         setSidebarOpen(false);
+        setMenuOpen(false);
       }
     });
     return () => {
@@ -42,17 +46,30 @@ const Dashboard: React.FC<DashboardProps & RouteComponentProps> = ({
     };
   });
 
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+    setMenuOpen(false);
+  };
 
-	return (
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+    if (!isDesktop) {
+      setSidebarOpen(false);
+    }
+  };
+
+  return (
     <div id="dashboard">
       <Helmet>
         <title>Dashboard</title>
       </Helmet>
       <DashboardHeader
-	      user={user}
-        toggleSidebar={() => setSidebarOpen(!isSidebarOpen)}
-	      redirect={history.push}
-	      historyListener={history.listen}
+        user={user}
+        isMenuOpen={isMenuOpen}
+        isSidebarOpen={isSidebarOpen}
+        toggleSidebar={toggleSidebar}
+        toggleMenu={toggleMenu}
+        redirect={history.push}
       />
       <Sidebar
         docked={isDesktop ? isSidebarOpen : false}
@@ -61,7 +78,7 @@ const Dashboard: React.FC<DashboardProps & RouteComponentProps> = ({
         sidebarClassName="sidebar"
         overlayClassName="sidebar-overlay"
         sidebar={<DashboardNav path={match.path} />}
-        onSetOpen={() => setSidebarOpen(!isSidebarOpen)}
+        onSetOpen={toggleSidebar}
       >
         <div />
       </Sidebar>
